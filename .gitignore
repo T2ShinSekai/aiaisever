@@ -1,0 +1,27 @@
+# Distribution / packaging
+src/.Python
+src/env/
+src/build/
+src/develop-eggs/
+src/dist/
+src/downloads/
+src/eggs/
+src/.eggs/
+src/lib/
+src/lib64/
+src/parts/
+src/sdist/
+src/var/
+*.egg-info/
+src/.installed.cfg
+*.egg
+
+# Serverless directories
+.serverless
+
+# Byte-compiled / optimized / DLL files
+src/__pycache__/
+*.py[cod]
+*$py.class
+
+src/node_modules/

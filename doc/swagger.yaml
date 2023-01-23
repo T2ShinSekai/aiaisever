@@ -1,0 +1,80 @@
+swagger: "2.0"
+info:
+  title: SLS AI Chat API
+  description: AIを用いた会話用のAPIです。ドキュメントの説明はここに記載してください。
+  version: 0.0.1
+host: api.example.com
+basePath: /dev
+schemes:
+  - https
+tags:
+  - name: hello
+    description: About test hello API
+
+produces:
+  - application/json
+
+consumes:
+  - application/json
+
+paths:
+  /hello:
+    get:
+      summary: テストAPIの実行結果を返却します。APIの概要はここに記載してください(120文字以内)
+      description: APIの説明はここに記載してください
+      tags:
+        - hello
+      # リクエストパラメータはここに記載
+      # parameters:
+      #   - name: personId
+      #     in: path
+      #     description: person id which you want to get.
+      #     required: true
+      #     type: "string"
+      responses:
+        200:
+          description: 成功時のレスポンスです
+          schema:
+            $ref: "#/definitions/successResModel"
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/error"
+      # swaggerからAPIGate WayのLambda統合まで行うためserverless framework
+      # から読み込めるようにするが、今回は利用しない
+      # x-amazon-apigateway-integration:
+      #   type: aws_proxy
+      #   responses:
+      #     default:
+      #       statusCode: "200"
+      #   uri: "arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/arn:aws:lambda:ap-northeast-1:{Your Account ID}:function:{Lambda function name}/invocations"
+      #   passthroughBehavior: "when_no_match"
+      #   httpMethod: "POST"
+      #   contentHandling: "CONVERT_TO_TEXT"
+definitions:
+  successResModel:
+    type: object
+    properties:
+      status:
+        type: "integer"
+        format: "int32"
+        example: 200
+      body:
+        type: "object"
+        $ref: "#/definitions/bodyModel"
+
+  bodyModel:
+    type: object
+    properties:
+      message:
+        type: "string"
+      event:
+        type: "string"
+
+  error:
+    type: object
+    properties:
+      errorCode:
+        type: "string"
+      errorMessage:
+        type: "string"
